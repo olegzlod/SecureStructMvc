@@ -141,7 +141,7 @@ namespace SecureStructMvc.Models
         private SecureString _securedValue;
         private const int _unmaskedSize = 4;
         private StringBuilder _strBld;
-        private static readonly List<char> _charsToIgnore = new List<char> { ' ', '\t', '\r', '\n' };
+        private static readonly List<char> _charsToIgnore = new List<char> { ' ', '\t', '\r', '\n','-' };
         private const char maskChar = 'x';
         private int _hashcode;
 
@@ -169,6 +169,8 @@ namespace SecureStructMvc.Models
                 //ignore whitespaces etc
                 if (_charsToIgnore.Contains(c))
                 {
+                    //if that's ignored char add as is
+                    _strBld.Append(c);
                     continue;
                 }
                 // adding a char to securestring
