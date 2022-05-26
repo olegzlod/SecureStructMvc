@@ -8,7 +8,7 @@ namespace SecureStructMvc.Models
     public class Details
     {
         public string Name { get; set; }
-        public BoltSecureStruct CreditCard { get; set; }
+        public SecureStruct CreditCard { get; set; }
         public string PlainCreditCard { get; set; }
     }
 }

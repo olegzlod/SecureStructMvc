@@ -16,7 +16,7 @@ using System.Xml.Serialization;
 
 namespace SecureStructMvc.Models
 {
-    public class MaskConverter : TypeConverter
+    public class SecureStructConverter : TypeConverter
     {
         public override bool GetCreateInstanceSupported(ITypeDescriptorContext context)
         {
@@ -68,7 +68,7 @@ namespace SecureStructMvc.Models
         {
             if (value is string)
             {
-                return new BoltSecureStruct((string)value);
+                return new SecureStruct((string)value);
             }
 
 
@@ -93,7 +93,7 @@ namespace SecureStructMvc.Models
         public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, System.Type destinationType)
         {
             object retVal = null;
-            BoltSecureStruct colDefi = (BoltSecureStruct)value;
+            SecureStruct colDefi = (SecureStruct)value;
             if (null == culture)
                 culture = CultureInfo.CurrentCulture;
 
@@ -105,7 +105,7 @@ namespace SecureStructMvc.Models
                 argTypes[0] = typeof(string);
 
                 // Lookup the appropriate Doofer constructor
-                ConstructorInfo constructor = typeof(BoltSecureStruct).GetConstructor(argTypes);
+                ConstructorInfo constructor = typeof(SecureStruct).GetConstructor(argTypes);
 
                 object[] arguments = new object[1];
 
@@ -126,7 +126,7 @@ namespace SecureStructMvc.Models
 
     }
 
-    public interface IMaskedStruct
+    public interface ISecureStruct
     {
         string ToPlainString();
     }
@@ -134,8 +134,8 @@ namespace SecureStructMvc.Models
 
 
     [Serializable]
-    [TypeConverter(typeof(MaskConverter))]
-    public struct BoltSecureStruct : IMaskedStruct, ISerializable, IDisposable, IXmlSerializable
+    [TypeConverter(typeof(SecureStructConverter))]
+    public struct SecureStruct : ISecureStruct, ISerializable, IDisposable, IXmlSerializable
     {
         #region private members
         private SecureString _securedValue;
@@ -149,7 +149,7 @@ namespace SecureStructMvc.Models
 
         #region ctors
 
-        public BoltSecureStruct(string value)
+        public SecureStruct(string value)
         {
             _securedValue = new SecureString();
             _strBld = new StringBuilder();
@@ -214,7 +214,7 @@ namespace SecureStructMvc.Models
 
         public override bool Equals(object obj)
         {
-            return ((BoltSecureStruct)obj).GetHashCode() == this.GetHashCode();
+            return ((SecureStruct)obj).GetHashCode() == this.GetHashCode();
         }
         public override int GetHashCode()
         {
