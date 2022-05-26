@@ -1,0 +1,25 @@
+﻿@model SecureStructMvc.Models.Details
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Secure Struct Example</h1>
+    <form action="/home/index" method="post">
+        <div style="display:table">
+            <div style="display:table-row">
+                <div style="display:table-cell">Name:</div>
+                <div style="display:table-cell"> <input type="text" name="Details.Name" id="Details.Name" value="@Model.Name" /></div>
+            </div>
+            <div style="display:table-row">
+                <div style="display:table-cell">Credit Card:</div>
+                <div style="display:table-cell"> <input type="text" name="Details.CreditCard" id="Details.CreditCard" value="@Model.CreditCard" /></div>
+            </div>
+            <div style="display:table-row">
+                <div style="display:table-cell">Plain Credit Card:</div>
+                <div style="display:table-cell"> <input type="text" name="Details.PlainCreditCard" id="Details.PlainCreditCard" value="@Model.PlainCreditCard" /></div>
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
